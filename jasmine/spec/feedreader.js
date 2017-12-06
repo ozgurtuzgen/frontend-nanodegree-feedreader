@@ -51,7 +51,6 @@ $(function () {
         });
     });
 
-
     /* a test suite named "The menu" */
     describe('The menu', function () {
 
@@ -60,7 +59,6 @@ $(function () {
          */
         it('should be hidden by default', function () {
             var result = $('body').hasClass('menu-hidden');
-            result = $('body').hasClass('menu-hidden');
             expect(result).toBe(true);
         });
 
@@ -73,7 +71,7 @@ $(function () {
             $('.menu-icon-link').click();
             var result = $('body').hasClass('menu-hidden');
             expect(result).toBe(false);
-            $('body').toggleClass('menu-hidden');
+            $('.menu-icon-link').click();
             result = $('body').hasClass('menu-hidden');
             expect(result).toBe(true);
         });
@@ -93,7 +91,7 @@ $(function () {
         });
 
         it('should load at least one feed', function (done) {
-            var result = $('.entry').length;
+            var result = $('.feed .entry').length;
             expect(result).toBeGreaterThan(0);
             done();
         });
@@ -114,14 +112,14 @@ $(function () {
         });
 
         it('should content change when feed change', function (done) {
-            var result = $('article > h2')[0];
-            loadFeed.call(result, 1, function () {
-                var newResult = $('article > h2')[0];
+
+            var result = $('.feed')[0].innerHTML;
+            loadFeed( 1, function () {
+                var newResult = $('.feed')[0].innerHTML;
                 expect(result).not.toBe(newResult);
 
                 done();
-            });
+            }, result);
         });
     });
-
 }());
